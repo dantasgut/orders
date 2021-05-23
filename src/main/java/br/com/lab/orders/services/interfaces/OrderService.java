@@ -9,7 +9,7 @@ import br.com.lab.orders.api.dtos.OrderDTO;
 @Service
 public interface OrderService {
 
-	public List<OrderDTO> getAll(String Status, Integer page, Integer pageSize);
+	public List<OrderDTO> findAll(String Status, Integer page, Integer pageSize);
 	public OrderDTO findById(OrderDTO orderDTO);
 	public void save(OrderDTO orderDTO);
 	public void delete(OrderDTO orderDTO);

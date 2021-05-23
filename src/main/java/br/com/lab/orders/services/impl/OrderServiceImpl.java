@@ -7,11 +7,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.lab.orders.api.dtos.OrderDTO;
 import br.com.lab.orders.repositories.entities.Order;
 import br.com.lab.orders.repositories.interfaces.OrderRepository;
+import br.com.lab.orders.repositories.specifications.OrderSpecification;
 import br.com.lab.orders.services.interfaces.OrderService;
 
 @Service
@@ -33,14 +35,14 @@ public class OrderServiceImpl implements OrderService{
 	
 		
 	
-	public List<OrderDTO> getAll(String status, Integer page, Integer pageSize){
+	public List<OrderDTO> findAll(String status, Integer page, Integer pageSize){
 		List<Order> orders;
 		
 		if(page != null && pageSize !=null ) {
 			Pageable paging = PageRequest.of(page, pageSize);
-			orders = orderRepository.getAll(status, paging);
+			orders = orderRepository.findAll(status, paging);
 		} else {
-			orders = orderRepository.getAll(status);
+			orders = orderRepository.findAll(Specification.where(OrderSpecification.status(status)));
 		}
 					
 		orders

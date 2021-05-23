@@ -21,11 +21,11 @@ public class OrderController {
 	
 	@GetMapping
 	@ResponseBody
-	public List<OrderDTO> getAll(			
+	public List<OrderDTO> findAll(			
 			@RequestParam(name="status", required=false) String status,
 			@RequestParam(name="page", required=false) Integer page, 
 			@RequestParam(name="pageSize", required=false)Integer pageSize){
-		return orderService.getAll(status, page, pageSize);
+		return orderService.findAll(status, page, pageSize);
 	}
 	
 }

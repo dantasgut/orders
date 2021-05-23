@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories("br.com.lab.orders.repositories")
+@EnableJpaRepositories("br.com.lab.orders.repositories.interfaces")
 @ComponentScan({
 		"br.com.lab.orders.api.services",
 		"br.com.lab.orders.services"
