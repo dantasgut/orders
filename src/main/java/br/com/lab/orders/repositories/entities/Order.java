@@ -38,6 +38,7 @@ public class Order {
 	private Set<Item> items;
 	
 	@Transient
+	@Column(name="total")
 	private Double total;
 
 	public Order() {

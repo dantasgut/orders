@@ -74,19 +74,20 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public OrderDTO findById(OrderDTO orderDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Order order = orderRepository.findById(orderDTO.getId()).orElse(new Order());
+		return modelMapper.map(order, OrderDTO.class);
 	}
 
 	@Override
-	public void save(OrderDTO orderDTO) {
-		// TODO Auto-generated method stub
-		
+	public void save(OrderDTO orderDTO) {		
+		Order order = modelMapper.map(orderDTO, Order.class);		
+		orderRepository.save(order);
 	}
 
 	@Override
 	public void delete(OrderDTO orderDTO) {
-		// TODO Auto-generated method stub
+		Order order = modelMapper.map(orderDTO, Order.class);
+		orderRepository.delete(order);
 		
 	}
 	
