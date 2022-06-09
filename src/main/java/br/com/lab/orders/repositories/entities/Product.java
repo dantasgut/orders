@@ -6,13 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name="tb_products")
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator = "sq_products")	
+	@TableGenerator(name = "sq_products", table = "tb_sequences", pkColumnName = "name", valueColumnName = "value", pkColumnValue="sq_products", initialValue=10000, allocationSize=10)	
 	@Column(name="id")
 	private Integer id;
 	

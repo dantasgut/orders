@@ -18,8 +18,7 @@ public interface OrderRepository extends PagingAndSortingRepository<Order, Integ
 	public List<Order> findAll(@Param("status") String status, Pageable paging);
 	
 	@Query("select distinct o from Order o inner join o.items i inner join i.product p where o.status=:status")
-	public List<Order> findAll(@Param("status") String status);
-	
+	public List<Order> findAll(@Param("status") String status);	
 	
 	public Page<Order> findAll(Specification<Order> specification, Pageable pageable);
 	public List<Order> findAll(Specification<Order> specification);

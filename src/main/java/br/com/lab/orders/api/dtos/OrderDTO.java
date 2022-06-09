@@ -3,6 +3,7 @@ package br.com.lab.orders.api.dtos;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
@@ -14,18 +15,24 @@ public class OrderDTO {
 	
 	private Integer id;
 	
+	@JsonProperty("date")
 	@ApiModelProperty(example="2021-02-22",required = true)
 	private LocalDate date;
 	
+	@JsonProperty("status")
 	@ApiModelProperty(example="finalizado",required = true)
 	private String status;
 	
+	@JsonProperty("currency")
 	@ApiModelProperty(example="BRL",required = true)
 	private String currency;
 	
-	@JsonProperty("items")
+	@JsonProperty("promotionCode")
 	@ApiModelProperty(name="items",required = true)
 	private String promotionCode;
+	
+	@JsonProperty("items")
+	@JsonManagedReference
 	private List<ItemDTO> itemsDTO;
 	private Double total;
 	

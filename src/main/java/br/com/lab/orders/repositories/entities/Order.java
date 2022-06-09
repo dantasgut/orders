@@ -1,16 +1,18 @@
 package br.com.lab.orders.repositories.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
 @Entity
@@ -18,7 +20,8 @@ import javax.persistence.Transient;
 public class Order {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator = "sq_orders")	
+	@TableGenerator(name = "sq_orders", table = "tb_sequences", pkColumnName = "name", valueColumnName = "value", pkColumnValue="sq_orders", initialValue=10000, allocationSize=1)
 	@Column(name="id")
 	private Integer id;
 	
@@ -34,8 +37,8 @@ public class Order {
 	@Column(name="promotion_code")
 	private String promotionCode;
 
-	@OneToMany(mappedBy="order", fetch = FetchType.LAZY)
-	private Set<Item> items;
+	@OneToMany(mappedBy="order", cascade = {CascadeType.ALL})	
+	private Set<Item> items = new HashSet<Item>();
 	
 	@Transient
 	@Column(name="total")
@@ -99,6 +102,4 @@ public class Order {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-
-	
 }

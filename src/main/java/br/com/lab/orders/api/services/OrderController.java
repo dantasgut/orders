@@ -20,7 +20,7 @@ import br.com.lab.orders.api.dtos.OrderDTO;
 import br.com.lab.orders.services.interfaces.OrderService;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
 	@Autowired
@@ -54,6 +54,7 @@ public class OrderController {
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable Integer id, @RequestBody OrderDTO orderDTO) {
 		orderDTO.setId(id);
+		//orderDTO.getItemsDTO().forEach(src->src.setId(idItem));
 		orderService.save(orderDTO);
 	}
 	
